@@ -6,37 +6,33 @@
 class ObjectDB {
 
   constructor(dbName) {
-    this.dbName = dbName;
-    this.db = {};
+    this.db = {
+      name: dbName,
+      data: {}
+    };
   }
 
   /** @function
    * @name init
    * @description Inits the database.
    * @param {object} template - Optional template of default values. */
-
   init(template) {
-    if (localStorage.getItem(this.dbName) === null) {
-      if (template) {
-        this.set(template);
-      } else{
-        this.set({});
-      }
+    if (localStorage.getItem(this.db.name) === null) {
+      this.set((template) ? template : {});
     }else {
       this.get();
     }
     return this;
   }
 
-
   /** @function
    * @name set
    * @description Sets data in the object db.
    * @param {object} data - Merges object with existing db object. */
   set(data) {
-    this.db = Object.assign({}, this.get(), data);
-    localStorage.setItem(this.dbName, JSON.stringify(this.db));
-    return this.db;
+    this.db.data = Object.assign({}, this.get(), data);
+    localStorage.setItem(this.db.name, JSON.stringify(this.db.data));
+    return this.db.data;
   }
 
   /** @function
@@ -46,11 +42,11 @@ class ObjectDB {
    */
   get(item) {
     if (item) {
-      this.db = JSON.parse(localStorage.getItem(this.dbName));
-      return this.db[item];
+      this.db.data = JSON.parse(localStorage.getItem(this.db.name));
+      return this.db.data[item];
     } else {
-      this.db = JSON.parse(localStorage.getItem(this.dbName));
-      return this.db;
+      this.db.data = JSON.parse(localStorage.getItem(this.db.name));
+      return this.db.data;
     }
   }
 
@@ -61,10 +57,10 @@ class ObjectDB {
    */
   remove(item) {
     if (item) {
-      delete this.db[item]
+      delete this.db.data[item]
       return this;
     } else {
-      this.db = {};
+      this.db.data = {};
       return this;
     }
   }
@@ -75,7 +71,7 @@ class ObjectDB {
    * @param {string} item - If provided, removes only item.
    */
   purge() {
-    localStorage.removeItem(this.dbName);
+    localStorage.removeItem(this.db.name);
     return this;
   }
 }

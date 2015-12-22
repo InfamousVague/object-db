@@ -1,6 +1,5 @@
 # object-db
-LocalStorage Object database tool.
-
+LocalStorage Object database tool. Just 1kb.
 
 ## Installation:
 

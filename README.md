@@ -12,26 +12,52 @@ npm install --save object-db
 
 ## Usage
 
-Define and init the DB
-
+Require ObjectDB
 ```javascript
 const ObjectDB = require('object-db');
+```
 
-let myDB = new ObjectDB('test_db').init();
+Init the DB, you can pass an object to init as a template.
 
-// Simply set new data, will overwrite existing assignments.
-// Keeps undeclared assignments. (Using Object.assign())
+```javascript
+let myDB = new ObjectDB('test_db').init({
+  first_visit: false,
+  show_tour: true
+});
+```
+
+Set new data.
+
+```javascript
 myDB.set({
   tested: true
 });
+```
 
-// You can get the entire db by providing no arguments.
+Get all database contents.  
+```javascript
 console.log(
   myDB.get();
 );
+```
 
-// You can get a specific item by providing the item name in your .get().
+Get database item.
+```javascript
 console.log(
   myDB.get('tested');
 );
+```
+
+Remove a database item.
+```javascript
+console.log(
+  myDB.remove('tested');
+);
+```
+
+Get purge and re-init the database.
+```javascript
+  myDB.purge().init({
+    purged: true
+  });
 ```

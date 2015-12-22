@@ -12,10 +12,16 @@ class ObjectDB {
 
   /** @function
    * @name init
-   * @description Inits the database. */
-  init() {
+   * @description Inits the database.
+   * @param {object} template - Optional template of default values. */
+
+  init(template) {
   	if (localStorage.getItem(this.dbName) === null) {
-      this.set({init: true});
+      if (template) {
+        this.set(template);
+      } else{
+        this.set({});
+      }
     }else {
     	this.get();
     }
@@ -36,7 +42,7 @@ class ObjectDB {
   /** @function
    * @name get
    * @description Gets either entire ObjectDB, or item by name.
-   * @param {string} item - If provided, returns item from database by name. 
+   * @param {string} item - If provided, returns item from database by name.
    */
   get(item) {
   	if (item) {
@@ -48,6 +54,30 @@ class ObjectDB {
 		}
   }
 
+  /** @function
+   * @name remove
+   * @description Removes either entire ObjectDB, or item by name.
+   * @param {string} item - If provided, removes only item.
+   */
+  remove(item) {
+  	if (item) {
+    	delete this.db[item]
+      return this;
+    } else {
+      this.db = {};
+      return this;
+		}
+  }
+
+  /** @function
+   * @name remove
+   * @description Removes either entire ObjectDB, or item by name.
+   * @param {string} item - If provided, removes only item.
+   */
+  purge() {
+  	localStorage.removeItem(this.dbName);
+    return this;
+  }
 }
 
 module.exports = ObjectDB;

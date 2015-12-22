@@ -1,5 +1,5 @@
 # object-db
-LocalStorage Object database tool. Just 1kb.
+LocalStorage Object database tool. Get, Set, and Subscribe. Just 2kb.
 
 ## Installation:
 
@@ -17,7 +17,6 @@ const ObjectDB = require('object-db');
 ```
 
 Init the DB, you can pass an object to init as a template.
-
 ```javascript
 let myDB = new ObjectDB('test_db').init({
   first_visit: false,
@@ -25,10 +24,11 @@ let myDB = new ObjectDB('test_db').init({
 });
 ```
 
-Set new data.
+You can also subscribe to the DB.
 ```javascript
-myDB.set({
-  tested: true
+myDB.subscribe((data) => {
+  // Called any time our database is modified.
+  console.log(data);
 });
 ```
 

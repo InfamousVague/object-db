@@ -10,6 +10,7 @@ class ObjectDB {
       name: dbName,
       data: {}
     };
+    this.publish = () => {};
   }
 
   /** @function
@@ -26,12 +27,42 @@ class ObjectDB {
   }
 
   /** @function
+   * @name subscribe
+   * @description Calls function when db is changed.
+   * @param {function} sub - function to be called. */
+  subscribe(publish) {
+    this.publish = publish;
+    window.addEventListener("storage", (e) => {
+      this.publish({
+      	db: this.db.name,
+     		data: this.get(),
+        at: Date.now()
+      });
+    }, false);
+    return this;
+  }
+
+  /** @function
    * @name set
    * @description Sets data in the object db.
    * @param {object} data - Merges object with existing db object. */
   set(data) {
-    this.db.data = Object.assign({}, this.get(), data);
+    this.db.data = Object.assign(
+      {},
+      this.get(),
+      data,
+      {
+        modified: Date.now()
+      }
+    );
+
     localStorage.setItem(this.db.name, JSON.stringify(this.db.data));
+
+    this.publish({
+      db: this.db.name,
+      data: this.get(),
+      at: Date.now()
+    });
     return this.db.data;
   }
 

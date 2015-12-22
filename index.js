@@ -63,7 +63,7 @@ class ObjectDB {
       data: this.get(),
       at: Date.now()
     });
-    return this.db.data;
+    return this;
   }
 
   /** @function
@@ -89,11 +89,10 @@ class ObjectDB {
   remove(item) {
     if (item) {
       delete this.db.data[item]
-      return this;
     } else {
       this.db.data = {};
-      return this;
     }
+    return this;
   }
 
   /** @function

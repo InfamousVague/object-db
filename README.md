@@ -1,5 +1,6 @@
 # object-db
-LocalStorage Object database tool. Get, Set, and Subscribe. Just 2kb.
+In browser JavaScript object storage. Get, Set, and Subscribe. Works across
+ browser tabs and windows. Just 2kb.
 
 ## Installation:
 
@@ -11,51 +12,29 @@ npm install --save object-db
 
 ## Usage
 
-Require ObjectDB
 ```javascript
+// Require ObjectDB
 const ObjectDB = require('object-db');
-```
 
-Init the DB, you can pass an object to init as a template.
-```javascript
-let myDB = new ObjectDB('test_db').init({
-  first_visit: false,
-  show_tour: true
-});
-```
+// Init the DB, you can pass an object to init as a template (optional).
+let myDB = new ObjectDB('test_db').init({ sweet: true });
 
-You can also subscribe to the DB.
-```javascript
+// You can also subscribe to the DB.
 myDB.subscribe((data) => {
-  // Called any time our database is modified.
   console.log(data);
 });
-```
 
-Get all database contents.  
-```javascript
+// Get all database contents.  
 console.log(
-  myDB.get();
+  myDB.get()
 );
-```
 
-Get database item.
-```javascript
-console.log(
-  myDB.get('tested');
-);
-```
+// Get database item.
+myDB.get('tested');
 
-Remove a database item.
-```javascript
-console.log(
-  myDB.remove('tested');
-);
-```
+/// Remove a database item.
+myDB.remove('tested');
 
-Get purge and re-init the database.
-```javascript
-myDB.purge().init({
-  purged: true
-});
+// Purge and re-init the database.
+myDB.purge().init();
 ```

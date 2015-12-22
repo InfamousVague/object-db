@@ -27,7 +27,6 @@ let myDB = new ObjectDB('test_db').init({
 ```
 
 Set new data.
-
 ```javascript
 myDB.set({
   tested: true
@@ -57,7 +56,7 @@ console.log(
 
 Get purge and re-init the database.
 ```javascript
-  myDB.purge().init({
-    purged: true
-  });
+myDB.purge().init({
+  purged: true
+});
 ```

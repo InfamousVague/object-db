@@ -1,0 +1,25 @@
+{
+  "name": "object-db",
+  "version": "1.0.0",
+  "description": "Create ObjectDB using LocalStorage",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wski/object-db"
+  },
+  "keywords": [
+    "object",
+    "db",
+    "localstorage",
+    "database"
+  ],
+  "author": "wski <contact.mattdylan@gmail.com>",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/wski/object-db/issues"
+  },
+  "homepage": "https://github.com/wski/object-db"
+}

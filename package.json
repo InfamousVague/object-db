@@ -1,6 +1,6 @@
 {
   "name": "object-db",
-  "version": "1.2.3",
+  "version": "1.2.4",
   "description": "Get, Set, and Subscribe, across browser windows & tabs. Just 2kb.",
   "main": "index.js",
   "scripts": {
